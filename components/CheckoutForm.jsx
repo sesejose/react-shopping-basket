@@ -4,10 +4,12 @@ import { insertOrder } from "../modules/db"; // It provides the function isertOr
 
 function CheckoutForm(props) {
   // We use props to receive the what comes from Basket --> Cart
-  const [paymentCompleted, setPaymentCompleted] = useState();
-  // 13. When the page loads the payment is not completed (false) --> But when we have a response from the server we want to set the payment to complete.
+  const [paymentCompleted, setPaymentCompleted] = useState(false);
+  // 13. When the page loads the payment is not completed (false)
+  // --> But when we have a response from the server we want to set the payment to complete (true).
   const theForm = useRef(null);
-  // The const response await until the insertOrder fetchs the data, why? If it does not need the data to do the things.
+  // The const response await until the insertOrder() in db fetchs the data.
+  // Why? If it does not need the data to do the things (pass parameter), or yes, it does?. Anyways...
   async function submit(e) {
     e.preventDefault();
     const response = await insertOrder({
@@ -52,9 +54,9 @@ function CheckoutForm(props) {
 
 export default CheckoutForm;
 
-// 1. First we tell the form on submit call the isertOrder() function
-// 2. We define that function in a new file. db.js in modules.
-// 3. insertOrder() fetch the data from the database and indicates the method 'POST'
+// 1. First we tell the form on submit call the isertOrder() function.
+// 2. We define that function in a new file. db.js in modules - it fetchs data and then POST.
+// 3. insertOrder() fetch the data from the database and indicates the method 'POST'. It returns the value from the "res" variable with the body that is the stringliyed JSON "payload".
 // 4. Then we need to grab the form and for that we use { useRef }
 // 5. In the tag form we add the atribute ref={}
 // 6. Then we create a new variable (const theForm) for that at the begining of the CheckoutForm function.

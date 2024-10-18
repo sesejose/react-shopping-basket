@@ -6,24 +6,24 @@ function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
-  // Fetching the data
+  // Fetching the data - products from the KEA API with () useEffect ) to avoid repetive function execution, don't?
   useEffect(() => {
     async function getData() {
       const res = await fetch("https://kea-alt-del.dk/t7/api/products");
       const data = await res.json();
       setProducts(data);
-      // console.log(data);
+      console.log(data);
     }
     getData();
   }, []);
 
-  // Function called by the button in the Product.jsx
+  // The following function is calledBack by the button in the Product.jsx
   // data is the product --> Is the argument in the callback function (props.data)
   // We named it data because it is what Dev Tools shows --> props/data: and object with properties/values
   function addProduct(data) {
-    // console.log("Add product:", data);
+    console.log("Add product:", data);
     const newProduct = { data };
-    setProducts((emptyArray) => emptyArray.concat(newProduct));
+    // setProducts((emptyArray) => emptyArray.concat(newProduct));
     //Do we have the product ??
     if (cart.find((item) => item.id === data.id)) {
       // Checking if there in the basket is already an item with the same id (equal to the data/product added).
@@ -65,11 +65,11 @@ function App() {
       });
       return filtered;
     });
-    // We knows that cart state was defined with setCart in the addProduct function.
-    // Here we define that state ( cart ) again and say: take the array and return the item as variable:value
+    // We knows that cart state was defined with setCart in the addProduct() function.
+    // Here we define that state ( cart ) again and say: take the array and return the item as variable: value
     // This is , that value would be a return from a map.
     // const = array.map(item) --> loop thorugh this --> and return the item.
-    // If that item has the same id that the id that was passed into the function as paramenter with the button --> Change the amount -1
+    // If that item has the same id that the item passed into the function as paramenter with the button --> Change the amount -1
     // If it has a different id return the item (this is keep it).
     // Now we need to filter (discard) that item obtined with amount:0 and return those with amount greater than Cer0.
   }

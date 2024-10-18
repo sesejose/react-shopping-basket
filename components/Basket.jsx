@@ -12,6 +12,7 @@ export default function Basket(props) {
     props.cart.forEach((item) => {
       total += item.amount * item.price;
     });
+    // console.log(total);
     return total;
   }
 
@@ -40,8 +41,9 @@ export default function Basket(props) {
           </ul>
           <h3>Total: {getTotal()},-</h3>
           {/* onClick in the Event in the button that turns the state of the form to true */}
-          {/* The following are CONDITIONS and means --> if(showForm){<button....} */}
-          {!showForm && <button onClick={() => setShowForm(true)}>Buy now</button>}
+          {/* The following are CONDITIONS and means --> if(showForm is false){<button....} */}
+          {/* {!showForm && <button onClick={() => setShowForm(true)}>Buy now</button>} */}
+          {getTotal() > 0 && <button onClick={() => setShowForm(true)}>Buy now</button>}
           {showForm && <CheckoutForm cart={props.cart} />}
           {/* We send the cart state to the checkoutForm(). The Basket.jsx already knows about the cart, here at the getTotal we define its value. */}
         </div>
